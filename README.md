@@ -1,25 +1,29 @@
-# vRealize Operations Report Downloader
-A simple utility that dowloads a report from vRealize Operations. Currently, only the latest report is downloaded.
+# vRealize Operations Schedule Dumper
+A simple utility that dumps detailed information about report schedules. This is useful mainly because the UI doesn't show the 
+resource for a report. 
 
 ## Installing
 ```bash
-git clone https://github.com/prydin/vrops-download-report
+git clone https://github.com/prydin/vrops-report-schedule-dump
 pip install --user -r requirements.txt
 ```
 
 ## Usage
 ```
-python dlreport.py [-h] 
+python dumpschedules.py [-h] 
   --url <vR Ops URL> 
   --user <vR Ops User> 
   --password <vR Ops password> 
+  --token <API token (vR Ops Cloud only)>
   --report <report name> 
   --output <output file> 
   --format <pdf or csv>
 ```
-All arguments are required
+Authentication is done either through username/password OR using a token (cloud only)
+
+If no report name is specified, all reports will be dumped.
 
 ## Example
 ```
-python dlreport.py --url http://myvrops.example.com --user admin --password topsecret --report "Capacity Report - Datastores" --format csv --output out.csv
+python dumpschedules.py --url http://myvrops.example.com --user admin --password topsecret --report "Capacity Report - Datastores" --output out.csv
 ```
