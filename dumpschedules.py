@@ -88,7 +88,10 @@ else:
 f = open(args.output, 'w')
 with f:
     for report in reports:
-        schedules = vrops.get('/reportdefinitions/%s/schedules' % report['id']).json()['reportSchedules']
+        data = vrops.get('/reportdefinitions/%s/schedules' % report['id']).json()
+        if not 'reportSchedules' in data:
+            continue
+        schedules = data['reportSchedules']
         for schedule in schedules:
             startDate = datetime.strptime(schedule['startDate'], "%m/%d/%Y")
             startDate.replace(hour=int(schedule['startHour']), minute=int(schedule['startMinute']))
